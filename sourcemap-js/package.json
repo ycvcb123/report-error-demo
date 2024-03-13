@@ -1,0 +1,23 @@
+{
+  "name": "sourcemap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build & http-server -p 8081",
+    "recover": "npm run build && node recover-sourcemap.js",
+    "build": "npx webpack --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "raven-js": "^3.9.2",
+    "source-map": "^0.7.4"
+  }
+}

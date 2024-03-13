@@ -1,0 +1,1 @@
+export const randomParam = Math.random() * 100000;
