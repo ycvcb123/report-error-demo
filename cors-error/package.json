@@ -1,0 +1,17 @@
+{
+  "name": "cors-error",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cors": "http-server ./server-8080 -p 8080 & node ./server-8081/express.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3"
+  }
+}
