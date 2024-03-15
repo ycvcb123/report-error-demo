@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build & http-server -p 8081",
-    "recover": "npm run build && node recover-sourcemap.js",
     "build": "npx webpack --config webpack.config.js"
   },
   "keywords": [],

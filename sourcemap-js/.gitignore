@@ -10,7 +10,7 @@
 docs/_build
 docs/doctrees
 
-dist
+dist/
 
 build
 node_modules

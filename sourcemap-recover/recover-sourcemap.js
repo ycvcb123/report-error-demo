@@ -19,7 +19,6 @@ sourcemapConsumer.then(consumer => {
   });
 
   const { source, line: originalLine, column: originalColumn } = originalPosition;
-
   console.log(`压缩后代码位置：行 ${compressedLine}，列 ${compressedColumn}`);
 
   if (source) {
