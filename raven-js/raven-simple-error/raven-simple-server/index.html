@@ -295,7 +295,11 @@
           </div>
           <div id="methodMap">
             <div v-for="(item1, index) in item.codeArray" :key="index" class="methodMap-name">
-                <span v-if="item1.heightlight" style="background: red;color:#fff">{{item1.message}}</span>
+                <template v-if="item1.heightlight">
+                    <span  style="background: red;color:#fff">{{item1.message}}</span>
+                    <span  v-if="item.owner">---></span>
+                    <span v-if="item.owner" style="background: #000;color:#fff;display: inline-block;paddingLeft: 5px;paddingRight: 5px;">  最近一提交者：{{item.owner}}</span>
+                </template>    
                 <span v-else>{{item1.message}}</span>
             </div>
             <!-- Your methodMap content here -->
@@ -355,6 +359,7 @@
                 errorInfoList.forEach((element) => {
                   let ele = {
                     fileName: element.source,
+                    owner: element.owner,
                     codeArray: [],
                   };
 

@@ -4,6 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const { SourceMapConsumer } = require('source-map');
+const { getCodeOwner } = require('./gitBlame');
 
 const app = express();
 const port = 3000;
@@ -127,17 +128,22 @@ app.get('/raven/api/getError', (req, res) => {
                 sourceContent = sourcemapDataForJson.sourcesContent[sourcemapDataForJson.sources.indexOf(sourcesPathMap[source])];
         
                 console.log(`压缩后代码位置：行 ${item.line}，列 ${item.column}`);
-    
+                let owner;
                 if (source) {
                     console.log(`原始源文件：${source}`);
                     console.log(`原始源文件行号：${originalLine}`);
-    
-                    // const sourceContent = consumer.sourceContentFor(source);
+                    const sourcePath = source.replace(/webpack:\/\/raven-simple-error\//, '');
+                    // const analyzePath = path.resolve(__dirname, `${sourcePath}`);
+
+                    if(!source.includes('node_modules')) {
+                        owner = await getCodeOwner(sourcePath, Number(originalLine));
+                    };
+                   
                     if (sourceContent) {
-                    const lines = sourceContent.split('\n');
-                    const codeLine = lines[originalPosition.line - 1];
-                    console.log('出问题代码行 -> Code line:', codeLine);
-                    }
+                        const lines = sourceContent.split('\n');
+                        const codeLine = lines[originalPosition.line - 1];
+                        console.log('出问题代码行 -> Code line:', codeLine);
+                    };
                     
                 } else {
                     console.log('无法找到原始源文件位置。');
@@ -145,7 +151,8 @@ app.get('/raven/api/getError', (req, res) => {
 
                 return Promise.resolve({
                     ...originalPosition,
-                    sourceContent
+                    sourceContent,
+                    owner
                 })
             });
         })
