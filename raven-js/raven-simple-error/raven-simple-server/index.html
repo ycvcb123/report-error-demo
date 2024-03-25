@@ -298,7 +298,7 @@
                 <template v-if="item1.heightlight">
                     <span  style="background: red;color:#fff">{{item1.message}}</span>
                     <span  v-if="item.owner">---></span>
-                    <span v-if="item.owner" style="background: #000;color:#fff;display: inline-block;paddingLeft: 5px;paddingRight: 5px;">  最近一提交者：{{item.owner}}</span>
+                    <span v-if="item.owner" style="background: #000;color:#fff;display: inline-block;paddingLeft: 5px;paddingRight: 5px;">  最近一次提交者：{{item.owner}}</span>
                 </template>    
                 <span v-else>{{item1.message}}</span>
             </div>
@@ -312,7 +312,7 @@
           </div>
         </div>
       </div>
-      <div id="api_detail_grey">
+      <!-- <div id="api_detail_grey">
         <div class="back-gray" @click="api_hide"></div>
         <div class="api_detail_content">
           <div class="api_detail_header">
@@ -321,7 +321,7 @@
           </div>
           <div id="parse_error_detail"></div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.1/vue.js"></script>
@@ -385,10 +385,7 @@
               .catch((error) => {
                 console.log(error);
               });
-          },
-          api_hide() {
-            // Handle hiding the API detail
-          },
+          }
         },
       });
     </script>
