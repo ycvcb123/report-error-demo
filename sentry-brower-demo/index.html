@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://browser.sentry-cdn.com/7.101.1/bundle.tracing.js" crossorigin="anonymous"></script> -->
+    <script src="bundle.tracing.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <button id="#test">test</button>
+</body>
+
+<script>
+    Sentry.init({
+        dsn:"http://163bece17841482db08e8f4588a9d5de@sentrytest.cn/2",
+        environment:'local',
+        release:'1.1.1',
+        ignoreErrors: [/PickleRick_\d\d/, 'RangeError'],
+        // An array of strings or regexps that'll be used to ignore specific errors based on their origin url
+        denyUrls: ['external-lib.js'],
+        // An array of strings or regexps that'll be used to allow specific errors based on their origin url
+        allowUrls: ['http://127.0.0.1:8000', 'https://browser.sentry-cdn'],
+        // initialScope: {
+        //     tags: {"my-tag": "my value"},
+        //     user: {id: 42, email: "john.doe@example.com"},
+        // },
+        debug:true, //debug版本的js库开启才有效
+        // //性能数据采集
+        // integrations: [new Sentry.BrowserTracing()],
+        // // Set tracesSampleRate to 1.0 to capture 100%
+        // // of transactions for performance monitoring.
+        // // We recommend adjusting this value in production
+        // tracesSampleRate: 1.0,
+    });
+
+    document.getElementById('#test').addEventListener('click', () => {
+        throw new Error('error test');
+    });
+</script>
+</html>
