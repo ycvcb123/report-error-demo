@@ -8,19 +8,26 @@
     <script src="bundle.tracing.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <button id="#test">test</button>
+    <div>
+        <button id="test">制造一个简单的错误</button>
+    </div>
+    
+    <div>
+        <button id="linkError">linkError</button>
+    </div>
+    
 </body>
 
 <script>
     Sentry.init({
-        dsn:"http://163bece17841482db08e8f4588a9d5de@sentrytest.cn/2",
-        environment:'local',
-        release:'1.1.1',
-        ignoreErrors: [/PickleRick_\d\d/, 'RangeError'],
+        dsn:"DSN",
+        // environment:'local',
+        // release:'1.1.1',
+        //ignoreErrors: [/PickleRick_\d\d/, 'RangeError'],
         // An array of strings or regexps that'll be used to ignore specific errors based on their origin url
-        denyUrls: ['external-lib.js'],
+        //denyUrls: ['external-lib.js'],
         // An array of strings or regexps that'll be used to allow specific errors based on their origin url
-        allowUrls: ['http://127.0.0.1:8000', 'https://browser.sentry-cdn'],
+        //allowUrls: ['http://127.0.0.1:8000', 'https://browser.sentry-cdn'],
         // initialScope: {
         //     tags: {"my-tag": "my value"},
         //     user: {id: 42, email: "john.doe@example.com"},
@@ -34,8 +41,24 @@
         // tracesSampleRate: 1.0,
     });
 
-    document.getElementById('#test').addEventListener('click', () => {
+    // 一个简单的错误
+    document.getElementById('test').addEventListener('click', () => {
         throw new Error('error test');
     });
+
+
+    //******************linkError*********************
+    document.getElementById('linkError').addEventListener('click', async () => {
+        const movie = event.target.dataset.title;
+        try {
+            const reviews = await fetchMovieReviews(movie);
+            renderMovieReviews(reviews);
+        } catch (e) {
+            const fetchError = new Error(`Failed to fetch reviews for: ${movie}`);
+            // fetchError.cause = e;
+            Sentry.captureException(fetchError);
+        }
+    });
+    //******************linkError*********************
 </script>
 </html>
