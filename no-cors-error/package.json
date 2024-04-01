@@ -1,0 +1,18 @@
+{
+  "name": "no-cors-error",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cro-domain-resources.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "js-server": "http-server js -p 8081",
+    "static-server": "http-server -p 8080",
+    "start": "npm-run-all -p js-server static-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
